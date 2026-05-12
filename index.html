@@ -98,7 +98,7 @@ section { position:relative; }
 /* ─── NAV ───────────────────────────────────────────── */
 nav {
   position:fixed; top:0; left:0; right:0; z-index:100;
-  height:62px;
+  height:120px;
   background:rgba(249,248,246,.92);
   backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
@@ -111,17 +111,14 @@ nav.scrolled { box-shadow:var(--shadow); }
   width:100%; display:flex; align-items:center; justify-content:space-between;
 }
 .nav-logo {
-  display:flex; align-items:center; gap:9px;
+  display:flex; align-items:center;
   text-decoration:none;
-  font-family:var(--font-h); font-weight:800;
-  font-size:18px; color:var(--navy); letter-spacing:-.4px;
 }
-.logo-mark {
-  width:30px; height:30px; border-radius:8px;
-  background:var(--navy);
-  display:flex; align-items:center; justify-content:center;
+.nav-logo img {
+  height: 110px;
+  width: auto;
+  display: block;
 }
-.logo-mark svg { width:16px; height:16px; }
 
 .nav-links {
   display:flex; align-items:center; gap:28px; list-style:none;
@@ -152,7 +149,7 @@ nav.scrolled { box-shadow:var(--shadow); }
 
 /* ─── HERO ──────────────────────────────────────────── */
 #hero {
-  padding:140px 0 80px;
+  padding:200px 0 80px;
   background:var(--white);
   overflow:hidden;
 }
@@ -650,14 +647,40 @@ h1 em {
   background:var(--card); border:1px solid var(--border);
   border-radius:var(--radius); padding:28px;
   box-shadow:var(--shadow);
-  transition:all .3s;
+  transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position:relative; overflow:hidden;
 }
-.exec-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); }
+.exec-card:hover { 
+  transform: scale(1.05); 
+  box-shadow: var(--shadow-lg); 
+  background: #DCFCE7 !important;
+  border-color: #0D7377 !important;
+  z-index: 10;
+}
 
 .exec-week {
-  font-size:10px; font-weight:800; letter-spacing:.12em;
-  text-transform:uppercase; color:var(--blue); margin-bottom:10px;
+  display: inline-block;
+  font-size: 10px; font-weight: 800; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 12px;
+  position: relative;
+  transition: color 0.4s;
+}
+.exec-week::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 14px;
+  height: 2px;
+  background: var(--blue);
+  transition: all 0.4s;
+}
+.exec-card:hover .exec-week {
+  color: #0D7377;
+}
+.exec-card:hover .exec-week::after {
+  width: 100%;
+  background: #0D7377;
 }
 .exec-num {
   width:40px; height:40px; border-radius:10px;
@@ -1017,8 +1040,12 @@ footer {
   flex-wrap:wrap; gap:16px;
 }
 .footer-logo {
-  font-family:var(--font-h); font-size:16px; font-weight:800;
-  color:#fff; text-decoration:none; letter-spacing:-.3px;
+  text-decoration:none;
+}
+.footer-logo img {
+  height: 80px;
+  width: auto;
+  display: block;
 }
 .footer-links { display:flex; gap:24px; }
 .footer-links a { font-size:13px; color:rgba(255,255,255,.4); text-decoration:none; transition:.2s; }
@@ -1042,6 +1069,9 @@ footer {
   .stat-item:nth-child(2) { border-right:none; }
 }
 @media (max-width:640px) {
+  nav { height: 80px; }
+  .nav-logo img { height: 60px; }
+  #hero { padding: 140px 0 60px; }
   .services-grid { grid-template-columns:1fr; }
   .exec-timeline { grid-template-columns:1fr; }
   .work-grid { grid-template-columns:1fr; }
@@ -1056,13 +1086,7 @@ footer {
 <nav id="main-nav">
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <div class="logo-mark">
-        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 2L18 7V13L10 18L2 13V7L10 2Z" stroke="white" stroke-width="1.5" fill="none"/>
-          <path d="M10 6L14 8.5V13.5L10 16L6 13.5V8.5L10 6Z" fill="white" opacity=".4"/>
-        </svg>
-      </div>
-      Techies
+      <img src="techieslogo.png" alt="Techies">
     </a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
@@ -1243,160 +1267,6 @@ footer {
   </div>
 </section>
 
-<!-- RECENT WORK -->
-<section id="recent">
-  <div class="container">
-    <div class="section-head-row">
-      <div>
-        <div class="section-label">Recent work</div>
-        <h2 class="section-title">Enterprise builds.<br>Live systems.</h2>
-      </div>
-      <a href="#cases" class="link-all">View selected case studies →</a>
-    </div>
-
-    <div class="work-grid">
-
-      <div class="work-card">
-        <div class="work-visual wv-1">
-          <div class="mini-ui">
-            <div class="mui-bar"><span class="mui-d"></span><span class="mui-d"></span><span class="mui-d"></span></div>
-            <div class="mui-body">
-              <div class="mui-row">
-                <span class="mui-label">Revenue MTD</span>
-                <span class="mui-val">SAR 4.2M</span>
-              </div>
-              <div class="mui-bars">
-                <div class="mui-bar-item mb-1"></div><div class="mui-bar-item mb-2"></div>
-                <div class="mui-bar-item mb-3"></div><div class="mui-bar-item mb-4"></div>
-                <div class="mui-bar-item mb-5"></div><div class="mui-bar-item mb-2"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="work-info">
-          <div class="work-tag wtag-blue"><span class="tag-dot"></span>Enterprise · Saudi Arabia</div>
-          <div class="work-name">Operations Hub ERP</div>
-          <p class="work-desc">Full-stack enterprise ERP for a major Saudi retail group, integrated with 3 legacy systems.</p>
-        </div>
-      </div>
-
-      <div class="work-card">
-        <div class="work-visual wv-3">
-          <div class="ai-mini">
-            <div class="ai-step"><div class="ai-step-icon asc-1">📥</div>Data Input<span class="ai-step-arrow">→</span></div>
-            <div class="ai-step"><div class="ai-step-icon asc-2">⚙️</div>AI Processing<span class="ai-step-arrow">→</span></div>
-            <div class="ai-step"><div class="ai-step-icon asc-3">🤖</div>LLM Model<span class="ai-step-arrow">→</span></div>
-            <div class="ai-step"><div class="ai-step-icon asc-4">✅</div>Action Deployed</div>
-          </div>
-        </div>
-        <div class="work-info">
-          <div class="work-tag wtag-amber"><span class="tag-dot"></span>AI Automation · UAE</div>
-          <div class="work-name">Workflow Automation Engine</div>
-          <p class="work-desc">Intelligent document processing and workflow automation running 42K daily operations.</p>
-        </div>
-      </div>
-
-      <div class="work-card">
-        <div class="work-visual wv-2">
-          <div style="display:flex;gap:10px;align-items:center;justify-content:center">
-            <div class="mob-mini">
-              <div class="mob-status">
-                <div>
-                  <div class="mob-val">18K</div>
-                  <div class="mob-label">Active Users</div>
-                </div>
-              </div>
-              <div class="mob-dots">
-                <div class="mob-dot-row accent"></div>
-                <div class="mob-dot-row"></div>
-                <div class="mob-dot-row accent" style="width:70%"></div>
-                <div class="mob-dot-row"></div>
-              </div>
-            </div>
-            <div class="mob-mini" style="width:70px">
-              <div class="mob-val" style="font-size:14px">iOS</div>
-              <div class="mob-label">Android</div>
-              <div class="mob-dots">
-                <div class="mob-dot-row accent"></div>
-                <div class="mob-dot-row" style="width:60%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="work-info">
-          <div class="work-tag wtag-green"><span class="tag-dot"></span>Mobile · B2C · GCC</div>
-          <div class="work-name">Cross-Platform Consumer App</div>
-          <p class="work-desc">iOS and Android app serving 18,000+ active GCC users with offline-first architecture.</p>
-        </div>
-      </div>
-
-      <div class="work-card">
-        <div class="work-visual wv-4">
-          <div class="infra-mini">
-            <div class="inf-node"><span class="inf-icon">☁️</span>Cloud<span class="inf-status inf-up">✓ Up</span></div>
-            <div class="inf-node"><span class="inf-icon">🗄️</span>DB<span class="inf-status inf-up">✓ Up</span></div>
-            <div class="inf-node"><span class="inf-icon">🔌</span>API<span class="inf-status inf-up">✓ Up</span></div>
-            <div class="inf-node"><span class="inf-icon">📡</span>CDN<span class="inf-status inf-up">✓ Up</span></div>
-          </div>
-        </div>
-        <div class="work-info">
-          <div class="work-tag wtag-teal"><span class="tag-dot"></span>Managed Services · KSA</div>
-          <div class="work-name">Enterprise Infra Management</div>
-          <p class="work-desc">24/7 managed cloud infrastructure for a fintech handling 12K+ requests per second.</p>
-        </div>
-      </div>
-
-      <div class="work-card">
-        <div class="work-visual wv-6">
-          <div class="mini-ui">
-            <div class="mui-bar"><span class="mui-d"></span><span class="mui-d"></span></div>
-            <div class="mui-body">
-              <div class="mui-row"><span class="mui-label">Payment Gateway</span><span class="mui-val" style="color:var(--teal)">SAR 2.3M</span></div>
-              <div style="display:flex;gap:6px;margin-top:8px">
-                <div style="flex:1;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center">
-                  <div style="font-size:9px;color:var(--muted);font-weight:700">TXN/S</div>
-                  <div style="font-family:var(--font-h);font-size:14px;font-weight:800;color:var(--navy)">340</div>
-                </div>
-                <div style="flex:1;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center">
-                  <div style="font-size:9px;color:var(--muted);font-weight:700">UPTIME</div>
-                  <div style="font-family:var(--font-h);font-size:14px;font-weight:800;color:var(--navy)">99.9%</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="work-info">
-          <div class="work-tag wtag-teal"><span class="tag-dot"></span>Fintech · UAE</div>
-          <div class="work-name">Payment Gateway Platform</div>
-          <p class="work-desc">High-throughput fintech payment layer processing 340 transactions/second with PCI compliance.</p>
-        </div>
-      </div>
-
-      <div class="work-card">
-        <div class="work-visual wv-5">
-          <div class="mini-ui">
-            <div class="mui-bar"><span class="mui-d"></span><span class="mui-d"></span></div>
-            <div class="mui-body">
-              <div class="mui-row"><span class="mui-label">SaaS Platform MVP</span></div>
-              <div style="display:flex;flex-direction:column;gap:5px;margin-top:6px">
-                <div style="height:6px;border-radius:3px;background:linear-gradient(90deg,var(--blue),#a78bfa);width:85%"></div>
-                <div style="height:6px;border-radius:3px;background:var(--border);width:100%"></div>
-                <div style="height:6px;border-radius:3px;background:linear-gradient(90deg,var(--teal),#34d399);width:60%"></div>
-              </div>
-              <div style="margin-top:10px;font-size:10px;color:var(--muted);font-weight:600">Shipped in 10 weeks ·  First users onboarded</div>
-            </div>
-          </div>
-        </div>
-        <div class="work-info">
-          <div class="work-tag wtag-blue"><span class="tag-dot"></span>MVP · KSA Startup</div>
-          <div class="work-name">SaaS Platform MVP</div>
-          <p class="work-desc">Concept to live product in 10 weeks. Scoped, designed, and shipped with investor-demo ready delivery.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- SERVICES -->
 <section id="services">
@@ -1865,7 +1735,9 @@ footer {
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <a href="#" class="footer-logo">Techies Technologies</a>
+    <a href="#" class="footer-logo">
+      <img src="techieslogo.png" alt="Techies">
+    </a>
     <div class="footer-links">
       <a href="#services">Services</a>
       <a href="#cases">Work</a>
