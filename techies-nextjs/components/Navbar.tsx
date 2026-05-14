@@ -21,7 +21,7 @@ export default function Navbar() {
         {/* CTA */}
         <div className="flex items-center gap-2">
           <a
-            href="https://wa.me/966500000000"
+            href="https://wa.me/995555916915?text=Hello%20Techies%2C%20I%20would%20like%20to%20talk%20about%20a%20project."
             className="btn-nav-ghost gtag-track"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -30,8 +30,9 @@ export default function Navbar() {
             <span className="hidden sm:inline">WhatsApp</span>
           </a>
           <a
-            href="#cta-final"
+            href="#quote"
             className="btn-nav-primary gtag-track"
+            data-drawer="quote"
           >
             Book a Call
           </a>

@@ -27,13 +27,14 @@ export default function CTASection() {
 
         <div className="flex flex-wrap justify-center gap-4">
           <a
-            href="tel:+966500000000"
+            href="#quote"
             className="btn-cta-primary gtag-track"
+            data-drawer="quote"
           >
-            Schedule a Call →
+            Schedule a Quote →
           </a>
           <a
-            href="https://wa.me/966500000000"
+            href="https://wa.me/995555916915?text=Hello%20Techies%2C%20I%20would%20like%20to%20talk%20about%20a%20project."
             className="btn-cta-wa gtag-track"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">

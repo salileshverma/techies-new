@@ -9,10 +9,14 @@ import WhySection    from '@/components/WhySection'
 import StackMarquee  from '@/components/StackMarquee'
 import CTASection    from '@/components/CTASection'
 import Footer        from '@/components/Footer'
+import LeadPopup     from '@/components/LeadPopup'
+import RequestQuoteDrawer from '@/components/RequestQuoteDrawer'
 
 export default function Home() {
   return (
     <>
+      <LeadPopup />
+      <RequestQuoteDrawer />
       <Navbar />
       <HeroSection />
       <StripMarquee />

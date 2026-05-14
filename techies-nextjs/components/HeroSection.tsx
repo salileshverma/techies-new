@@ -30,7 +30,7 @@ export default function HeroSection() {
               AI automation, custom development, and managed infrastructure — engineered for Saudi Arabia, UAE, and the wider GCC market.
             </p>
             <div className="flex flex-wrap gap-3 fade-up d4">
-              <a href="#cta-final" className="btn-primary gtag-track">
+              <a href="#quote" className="btn-primary gtag-track" data-drawer="quote">
                 Book a Call <em className="arrow-icon">→</em>
               </a>
               <a href="#cases" className="btn-outline">
