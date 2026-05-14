@@ -22,7 +22,15 @@ export default function CaseStudies() {
           <a href="https://trycolo.co./" target="_blank" rel="noopener noreferrer" className="block no-underline">
             <div className="case-card">
               <div className="case-visual">
-                <Image src="/colo.webp" alt="colo.co. — Fintech Platform" fill priority style={{objectFit:'cover',objectPosition:'top center'}} />
+                <Image 
+                  src="/colo.webp" 
+                  alt="colo.co. — Fintech Platform" 
+                  fill 
+                  priority 
+                  quality={65}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{objectFit:'cover',objectPosition:'top center'}} 
+                />
                 <div className="case-visual-overlay">
                   <div className="case-overlay-pill"><ExternalIcon />View Project</div>
                 </div>
@@ -47,7 +55,15 @@ export default function CaseStudies() {
           <a href="https://www.mashfa.com/en" target="_blank" rel="noopener noreferrer" className="block no-underline">
             <div className="case-card">
               <div className="case-visual">
-                <Image src="/mashfa.webp" alt="Mashfa — Digital Healthcare" fill priority style={{objectFit:'cover',objectPosition:'top center'}} />
+                <Image 
+                  src="/mashfa.webp" 
+                  alt="Mashfa — Digital Healthcare" 
+                  fill 
+                  priority 
+                  quality={65}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{objectFit:'cover',objectPosition:'top center'}} 
+                />
                 <div className="case-visual-overlay">
                   <div className="case-overlay-pill"><ExternalIcon />View Project</div>
                 </div>
@@ -74,7 +90,14 @@ export default function CaseStudies() {
           <a href="https://trylit.co/" target="_blank" rel="noopener noreferrer" className="block no-underline">
             <div className="case-card case-card-wide">
               <div className="case-visual case-visual-wide" style={{position:'relative'}}>
-                <Image src="/trylit.webp" alt="Lit — Beauty Brand" fill style={{objectFit:'cover',objectPosition:'top center'}} />
+                <Image 
+                  src="/trylit.webp" 
+                  alt="Lit — Beauty Brand" 
+                  fill 
+                  quality={65}
+                  sizes="100vw"
+                  style={{objectFit:'cover',objectPosition:'top center'}} 
+                />
                 <div className="case-visual-overlay">
                   <div className="case-overlay-pill"><ExternalIcon />View Project</div>
                 </div>

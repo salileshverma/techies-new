@@ -102,6 +102,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   }
                 }
               });
+
+              // Navbar scroll state
+              const nav = document.querySelector('nav');
+              if (nav) {
+                window.addEventListener('scroll', () => {
+                  if (window.scrollY > 30) nav.classList.add('scrolled');
+                  else nav.classList.remove('scrolled');
+                });
+              }
             `
           }}
         />
