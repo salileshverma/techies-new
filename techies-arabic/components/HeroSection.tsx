@@ -1,0 +1,108 @@
+import HeroBars from './HeroBars'
+
+export default function HeroSection() {
+  return (
+    <section id="hero" className="relative pt-[120px] pb-20 overflow-hidden">
+      {/* Background ornament */}
+      <svg className="hero-ornament" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M240 0 L480 120 L480 360 L240 480 L0 360 L0 120 Z" stroke="#0f1f3d" strokeWidth="1"/>
+        <path d="M240 60 L420 150 L420 330 L240 420 L60 330 L60 150 Z" stroke="#0f1f3d" strokeWidth="1"/>
+        <path d="M240 120 L360 180 L360 300 L240 360 L120 300 L120 180 Z" stroke="#0f1f3d" strokeWidth="1"/>
+        <path d="M240 180 L300 210 L300 270 L240 300 L180 270 L180 210 Z" stroke="#0f1f3d" strokeWidth="1"/>
+        <line x1="240" y1="0" x2="240" y2="480" stroke="#0f1f3d" strokeWidth=".5"/>
+        <line x1="0" y1="240" x2="480" y2="240" stroke="#0f1f3d" strokeWidth=".5"/>
+        <line x1="0" y1="120" x2="480" y2="360" stroke="#0f1f3d" strokeWidth=".5"/>
+        <line x1="480" y1="120" x2="0" y2="360" stroke="#0f1f3d" strokeWidth=".5"/>
+      </svg>
+
+      <div className="max-w-[1120px] mx-auto px-4 sm:px-7">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* LEFT */}
+          <div>
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-text2 mb-5 fade-up d1">
+              <span className="live-dot" />
+              تكنولوجيا المؤسسات في الخليج
+            </div>
+            <h1 className="font-heading text-[clamp(36px,5vw,58px)] font-extrabold text-navy leading-[1.05] tracking-[-2px] mb-5 fade-up d2">
+              أنظمة مؤسسية<br />مبنية <em className="text-blue not-italic">للتوسع.</em>
+            </h1>
+            <p className="text-base text-muted leading-relaxed mb-8 max-w-md fade-up d3">
+              أتمتة الذكاء الاصطناعي، التطوير المخصص، والبنية التحتية المدارة — مصممة للمملكة العربية السعودية، الإمارات العربية المتحدة، وسوق الخليج الأوسع.
+            </p>
+            <div className="flex flex-wrap gap-3 fade-up d4">
+              <a href="#quote" className="btn-primary gtag-track" data-drawer="quote">
+                احجز مكالمة <em className="arrow-icon">→</em>
+              </a>
+              <a href="#cases" className="btn-outline">
+                عرض المشاريع <em className="arrow-icon">→</em>
+              </a>
+            </div>
+          </div>
+
+          {/* RIGHT — Dashboard */}
+          <div className="relative fade-up d4">
+            {/* Floating chip 1 */}
+            <div className="hero-chip chip-1">
+              <span className="chip-icon">🇸🇦</span>
+              المملكة العربية السعودية ومنطقة الخليج
+            </div>
+
+            <div className="dash-shell">
+              <div className="dash-topbar">
+                <div className="tb-dots flex gap-1.5">
+                  <span className="tb-dot" /><span className="tb-dot" /><span className="tb-dot" />
+                </div>
+                <span className="tb-url">techies-client-dashboard.app</span>
+                <div className="tb-status">
+                  <span className="status-dot" /> جميع الأنظمة تعمل
+                </div>
+              </div>
+              <div className="dash-body">
+                <div className="dash-tabs">
+                  {['نظرة عامة','التحليلات','المالية','الإعدادات'].map((t,i) => (
+                    <span key={t} className={`dash-tab${i===0?' active':''}`}>{t}</span>
+                  ))}
+                </div>
+                <div className="kpi-row">
+                  <div className="kpi-card">
+                    <div className="kpi-label">الإيرادات</div>
+                    <div className="kpi-val">12.4M ريال</div>
+                    <div className="kpi-up">↑ 24.6% هذا الشهر</div>
+                  </div>
+                  <div className="kpi-card">
+                    <div className="kpi-label">المستخدمين النشطين</div>
+                    <div className="kpi-val">18,702</div>
+                    <div className="kpi-up">↑ 32% مقابل الشهر الماضي</div>
+                  </div>
+                  <div className="kpi-card">
+                    <div className="kpi-label">مهام الذكاء الاصطناعي</div>
+                    <div className="kpi-val">94,180</div>
+                    <div className="kpi-up">↑ توسع تلقائي</div>
+                  </div>
+                </div>
+                <div className="text-[10px] text-muted font-bold uppercase tracking-wider mb-2">الأداء الشهري</div>
+                <HeroBars />
+                <table className="mini-table">
+                  <thead>
+                    <tr><th>المنتج</th><th>الوحدات</th><th>القيمة (ريال)</th><th>الحالة</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Enterprise CRM</td><td>142</td><td>4.2M</td><td><span className="tbl-badge badge-live">مباشر</span></td></tr>
+                    <tr><td>Analytics Engine</td><td>89</td><td>3.1M</td><td><span className="tbl-badge badge-live">مباشر</span></td></tr>
+                    <tr><td>Mobile Platform</td><td>211</td><td>2.8M</td><td><span className="tbl-badge badge-build">بناء</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Floating chip 2 */}
+            <div className="hero-chip chip-2">
+              <span className="chip-icon">⚡</span>
+              الأحدث: منصة CRM v4.2
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
