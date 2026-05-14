@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 
 export default function RequestQuoteDrawer() {
   const [isOpen, setIsOpen] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle')
 
   useEffect(() => {
     const handleOpen = () => setIsOpen(true)
@@ -24,6 +25,43 @@ export default function RequestQuoteDrawer() {
     }
   }, [])
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setStatus('submitting')
+    
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      company: formData.get('company'),
+      mobile: formData.get('mobile'),
+      message: formData.get('message'),
+      formType: 'Request Quote Drawer'
+    }
+
+    try {
+      // REPLACE THIS URL with your Google Apps Script Web App URL
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzejBz8BsftpZ5A6PE2P8e4VXGp6D9K4BY8L6Ew9GmDncDSSJL7kKdOLWwxXdTgRVOI/exec'
+      
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      
+      setStatus('success')
+      setTimeout(() => {
+        setIsOpen(false)
+        setStatus('idle')
+      }, 2000)
+    } catch (error) {
+      console.error('Submission error:', error)
+      alert('Something went wrong. Please try again.')
+      setStatus('idle')
+    }
+  }
+
   return (
     <div className={`drawer-overlay ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(false)}>
       <div className="drawer-content" onClick={(e) => e.stopPropagation()}>
@@ -36,23 +74,25 @@ export default function RequestQuoteDrawer() {
 
         <h2 className="drawer-h">Request A Quote</h2>
 
-        <form className="drawer-form" onSubmit={(e) => e.preventDefault()}>
+        <form className="drawer-form" onSubmit={handleSubmit}>
           <div className="drawer-form-group">
-            <input type="text" className="drawer-input" placeholder="Enter name" required />
+            <input type="text" name="name" className="drawer-input" placeholder="Enter name" required />
           </div>
           <div className="drawer-form-group">
-            <input type="email" className="drawer-input" placeholder="Enter email" required />
+            <input type="email" name="email" className="drawer-input" placeholder="Enter email" required />
           </div>
           <div className="drawer-form-group">
-            <input type="text" className="drawer-input" placeholder="Enter company" />
+            <input type="text" name="company" className="drawer-input" placeholder="Enter company" />
           </div>
           <div className="drawer-form-group">
-            <input type="text" className="drawer-input" placeholder="Enter mobile" required />
+            <input type="text" name="mobile" className="drawer-input" placeholder="Enter mobile" required />
           </div>
           <div className="drawer-form-group">
-            <textarea className="drawer-input drawer-textarea" placeholder="Enter your message"></textarea>
+            <textarea name="message" className="drawer-input drawer-textarea" placeholder="Enter your message"></textarea>
           </div>
-          <button type="submit" className="drawer-submit">Submit</button>
+          <button type="submit" className="drawer-submit" disabled={status === 'submitting'}>
+            {status === 'submitting' ? 'Sending...' : status === 'success' ? 'Sent!' : 'Submit'}
+          </button>
         </form>
 
         <div className="drawer-sep" />

@@ -4,6 +4,7 @@ import Image from 'next/image'
 
 export default function LeadPopup() {
   const [isOpen, setIsOpen] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle')
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -12,6 +13,45 @@ export default function LeadPopup() {
 
     return () => clearTimeout(timer)
   }, [])
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setStatus('submitting')
+    
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      company: formData.get('company'),
+      country: formData.get('country'),
+      mobile: formData.get('mobile'),
+      service: formData.get('service'),
+      message: formData.get('message'),
+      formType: 'Lead Popup'
+    }
+
+    try {
+      // REPLACE THIS URL with your Google Apps Script Web App URL
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzejBz8BsftpZ5A6PE2P8e4VXGp6D9K4BY8L6Ew9GmDncDSSJL7kKdOLWwxXdTgRVOI/exec'
+      
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Apps Script requires no-cors for simple redirect handling
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      
+      setStatus('success')
+      setTimeout(() => {
+        setIsOpen(false)
+        setStatus('idle')
+      }, 2000)
+    } catch (error) {
+      console.error('Submission error:', error)
+      alert('Something went wrong. Please try again.')
+      setStatus('idle')
+    }
+  }
 
   if (!isOpen) return null
 
@@ -74,44 +114,46 @@ export default function LeadPopup() {
           <h3 className="popup-h-right">Let&apos;s Talk About Your Project</h3>
           <p className="popup-sub">Share a few details and our team will get back within 24 hours.</p>
 
-          <form className="popup-form" onSubmit={(e) => e.preventDefault()}>
+          <form className="popup-form" onSubmit={handleSubmit}>
             <div className="popup-form-grid">
               <div className="form-group">
                 <label className="form-label">Full Name*</label>
-                <input type="text" className="form-input" placeholder="John Doe" required />
+                <input type="text" name="name" className="form-input" placeholder="John Doe" required />
               </div>
               <div className="form-group">
                 <label className="form-label">Email*</label>
-                <input type="email" className="form-input" placeholder="john@example.com" required />
+                <input type="email" name="email" className="form-input" placeholder="john@example.com" required />
               </div>
               <div className="form-group">
                 <label className="form-label">Company Name</label>
-                <input type="text" className="form-input" placeholder="Your company name" />
+                <input type="text" name="company" className="form-input" placeholder="Your company name" />
               </div>
               <div className="form-group">
                 <label className="form-label">Country</label>
-                <input type="text" className="form-input" placeholder="e.g. USA, KSA" />
+                <input type="text" name="country" className="form-input" placeholder="e.g. USA, KSA" />
               </div>
               <div className="form-group">
                 <label className="form-label">Contact Number*</label>
-                <input type="text" className="form-input" placeholder="+1 234..." required />
+                <input type="text" name="mobile" className="form-input" placeholder="+1 234..." required />
               </div>
               <div className="form-group">
                 <label className="form-label">Services</label>
-                <select className="form-input">
-                  <option>Select a service</option>
-                  <option>Web Development</option>
-                  <option>Mobile App</option>
-                  <option>AI Automation</option>
-                  <option>UI/UX Design</option>
+                <select name="service" className="form-input">
+                  <option value="">Select a service</option>
+                  <option value="Web Development">Web Development</option>
+                  <option value="Mobile App">Mobile App</option>
+                  <option value="AI Automation">AI Automation</option>
+                  <option value="UI/UX Design">UI/UX Design</option>
                 </select>
               </div>
               <div className="form-group full">
                 <label className="form-label">Project Details</label>
-                <textarea className="form-input form-textarea" placeholder="Tell us briefly about your idea..."></textarea>
+                <textarea name="message" className="form-input form-textarea" placeholder="Tell us briefly about your idea..."></textarea>
               </div>
             </div>
-            <button type="submit" className="popup-submit">Submit</button>
+            <button type="submit" className="popup-submit" disabled={status === 'submitting'}>
+              {status === 'submitting' ? 'Sending...' : status === 'success' ? 'Sent!' : 'Submit'}
+            </button>
           </form>
         </div>
       </div>
