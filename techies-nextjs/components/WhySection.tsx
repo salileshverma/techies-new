@@ -27,7 +27,7 @@ export default function WhySection() {
           {/* Points */}
           <div className="why-points">
             {points.map(p => (
-              <div key={p.num} className="why-point fade-up d2">
+              <div key={p.num} className="why-point">
                 <div className="wp-num">{p.num}</div>
                 <div>
                   <div className="wp-title">{p.title}</div>
@@ -38,7 +38,7 @@ export default function WhySection() {
           </div>
 
           {/* Benchmark card */}
-          <div className="bench-card fade-up d4">
+          <div className="bench-card">
             <div className="bench-title">Performance Benchmarks</div>
             
             <div className="bench-rows">

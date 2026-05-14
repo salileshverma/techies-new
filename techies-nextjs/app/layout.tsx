@@ -77,12 +77,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }, { threshold: 0.1 });
 
               document.querySelectorAll(
-                '.work-card, .svc-card, .exec-card, .case-card, .why-point, .stat-item, .fade-up'
+                '.svc-card, .exec-card, .stat-item, .fade-up'
               ).forEach((el, i) => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(18px)';
                 el.style.transition = 'opacity .55s ease ' + (i * 0.05) + 's, transform .55s ease ' + (i * 0.05) + 's';
                 io.observe(el);
+              });
+
+              // Global gtag tracking for server components
+              document.addEventListener('click', (e) => {
+                const target = e.target.closest('.gtag-track');
+                if (target && target.tagName === 'A') {
+                  const url = target.getAttribute('href');
+                  if (url && !url.startsWith('#')) {
+                    e.preventDefault();
+                    if (window.gtag_report_conversion) {
+                      window.gtag_report_conversion(url);
+                    } else {
+                      window.location.href = url;
+                    }
+                  } else if (window.gtag_report_conversion) {
+                    window.gtag_report_conversion();
+                  }
+                }
               });
             `
           }}

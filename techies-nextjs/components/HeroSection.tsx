@@ -1,37 +1,6 @@
-'use client'
-import { useEffect, useRef } from 'react'
+import HeroBars from './HeroBars'
 
 export default function HeroSection() {
-  const barsRef = useRef<HTMLDivElement[]>([])
-  const heights = [45, 60, 75, 55, 88, 65, 95, 70]
-
-  useEffect(() => {
-    barsRef.current.forEach((bar, i) => {
-      if (!bar) return
-      setTimeout(() => {
-        bar.style.transition = 'height 1s ease'
-        bar.style.height = heights[i] + '%'
-      }, i * 80)
-    })
-    const interval = setInterval(() => {
-      barsRef.current.forEach(bar => {
-        if (!bar) return
-        bar.style.transition = 'height 1.4s ease'
-        bar.style.height = (Math.random() * 60 + 30) + '%'
-      })
-    }, 4000)
-    return () => clearInterval(interval)
-  }, [])
-
-  const trackClick = (e: React.MouseEvent<HTMLAnchorElement>, url?: string) => {
-    if (url) e.preventDefault()
-    if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
-      ;(window as any).gtag_report_conversion(url)
-    } else if (url) {
-      window.location.href = url
-    }
-  }
-
   return (
     <section id="hero" className="relative pt-[120px] pb-20 overflow-hidden">
       {/* Background ornament */}
@@ -61,7 +30,7 @@ export default function HeroSection() {
               AI automation, custom development, and managed infrastructure — engineered for Saudi Arabia, UAE, and the wider GCC market.
             </p>
             <div className="flex flex-wrap gap-3 fade-up d4">
-              <a href="#cta-final" className="btn-primary" onClick={(e) => trackClick(e)}>
+              <a href="#cta-final" className="btn-primary gtag-track">
                 Book a Call <em className="arrow-icon">→</em>
               </a>
               <a href="#cases" className="btn-outline">
@@ -112,16 +81,7 @@ export default function HeroSection() {
                   </div>
                 </div>
                 <div className="text-[10px] text-muted font-bold uppercase tracking-wider mb-2">Monthly Performance</div>
-                <div className="mini-chart mb-3">
-                  {heights.map((h, i) => (
-                    <div
-                      key={i}
-                      className={`mc-bar${[2,4,6].includes(i) ? ' hi' : ''}`}
-                      style={{ height: '4px' }}
-                      ref={el => { if (el) barsRef.current[i] = el }}
-                    />
-                  ))}
-                </div>
+                <HeroBars />
                 <table className="mini-table">
                   <thead>
                     <tr><th>Product</th><th>Units</th><th>SAR Value</th><th>Status</th></tr>
