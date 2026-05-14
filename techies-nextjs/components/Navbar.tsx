@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Navbar() {
   return (
-    <nav className={scrolled ? 'scrolled' : ''}>
+    <nav>
       <div className="max-w-[1120px] mx-auto px-4 sm:px-7 flex items-center justify-between h-full">
         {/* Logo */}
         <Link href="#" className="nav-logo">
