@@ -61,6 +61,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
 
         {children}
+
+        {/* Instant scroll reveal (prevents hydration flash) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              const io = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                  if (e.isIntersecting) {
+                    e.target.style.opacity = '1';
+                    e.target.style.transform = 'translateY(0)';
+                    io.unobserve(e.target);
+                  }
+                });
+              }, { threshold: 0.1 });
+
+              document.querySelectorAll(
+                '.work-card, .svc-card, .exec-card, .case-card, .why-point, .stat-item, .fade-up'
+              ).forEach((el, i) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(18px)';
+                el.style.transition = 'opacity .55s ease ' + (i * 0.05) + 's, transform .55s ease ' + (i * 0.05) + 's';
+                io.observe(el);
+              });
+            `
+          }}
+        />
       </body>
     </html>
   )
